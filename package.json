@@ -1,0 +1,29 @@
+{
+  "name": "@pown/request",
+  "version": "2.0.0",
+  "description": "Pownage guaranteed",
+  "main": "lib/index.js",
+  "scripts": {
+    "text": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pownjs/pown-request.git"
+  },
+  "keywords": [
+    "exploit",
+    "framework"
+  ],
+  "author": "pdp <pdp@gnucitizen.org>",
+  "contributors": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pownjs/pown-request/issues"
+  },
+  "homepage": "https://github.com/pownjs/pown-request#readme",
+  "dependencies": {
+    "is-deflate": "^1.0.0",
+    "is-gzip": "^2.0.0",
+    "performance-now": "^2.1.0"
+  }
+}
