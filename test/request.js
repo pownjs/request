@@ -1,11 +1,11 @@
-const lib = require('../lib')
+const request = require('../lib/request')
 
 const assert = require('assert')
 
-describe('lib', () => {
+describe('request', () => {
     describe('#fetch()', () => {
         it('must fetch http request', async() => {
-            const tran = await lib.fetch('http://httpbin.org/get')
+            const tran = await request.fetch('http://httpbin.org/get')
 
             const { responseBody } = tran
 
@@ -15,7 +15,7 @@ describe('lib', () => {
         })
 
         it('must fetch https request', async() => {
-            const tran = await lib.fetch('https://httpbin.org/get')
+            const tran = await request.fetch('https://httpbin.org/get')
 
             const { responseBody } = tran
 
