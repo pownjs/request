@@ -4,7 +4,7 @@ const assert = require('assert')
 
 describe('scheduler', () => {
     describe('#fetch()', () => {
-        const scheduler = new Scheduler({concurrent: 1})
+        const scheduler = new Scheduler()
 
         it('must fetch http request', async() => {
             const tran = await scheduler.fetch('http://httpbin.org/get')
