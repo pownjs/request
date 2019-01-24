@@ -3,3 +3,7 @@
 # Pown Request
 
 > **WARNING**: work in progress
+
+## Wish List
+
+* Return response body as promise if configured.
