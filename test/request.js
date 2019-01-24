@@ -24,4 +24,14 @@ describe('request', () => {
             assert.ok(url === 'https://httpbin.org/get', 'url === https://httpbin.org/get')
         })
     })
+
+    describe('#request', () => {
+        it('must not download body', async() => {
+            const tran = await request.request({ method: 'GET', uri: 'http://httpbin.org/get', download: false })
+
+            const { responseBody } = tran
+
+            assert.ok(responseBody.length === 0, 'responseBody.length === 0')
+        })
+    })
 })
