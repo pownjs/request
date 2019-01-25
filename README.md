@@ -6,4 +6,7 @@
 
 ## Wish List
 
+
+* Proxy support.
 * Return response body as promise if configured.
+* HTTP/2 support - virtually around the corner.
