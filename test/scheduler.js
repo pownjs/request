@@ -13,7 +13,7 @@ describe('scheduler', () => {
 
             const { url } = JSON.parse(responseBody.toString())
 
-            assert.ok(url === 'http://httpbin.org/get', 'url === http://httpbin.org/get')
+            assert.equal(url, 'https://httpbin.org/get') // NOTE: bug in httpbin
         })
 
         it('must fetch https request', async() => {
@@ -23,7 +23,7 @@ describe('scheduler', () => {
 
             const { url } = JSON.parse(responseBody.toString())
 
-            assert.ok(url === 'https://httpbin.org/get', 'url === https://httpbin.org/get')
+            assert.equal(url, 'https://httpbin.org/get')
         })
     })
 })
@@ -39,7 +39,7 @@ describe('systemScheduler', () => {
 
             const { url } = JSON.parse(responseBody.toString())
 
-            assert.ok(url === 'http://httpbin.org/get', 'url === http://httpbin.org/get')
+            assert.equal(url, 'https://httpbin.org/get') // NOTE: bug in httpbin
         })
 
         it('must fetch https request', async() => {
@@ -49,7 +49,7 @@ describe('systemScheduler', () => {
 
             const { url } = JSON.parse(responseBody.toString())
 
-            assert.ok(url === 'https://httpbin.org/get', 'url === https://httpbin.org/get')
+            assert.equal(url, 'https://httpbin.org/get')
         })
     })
 })

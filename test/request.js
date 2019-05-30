@@ -11,7 +11,7 @@ describe('request', () => {
 
             const { url } = JSON.parse(responseBody.toString())
 
-            assert.ok(url === 'http://httpbin.org/get', 'url === http://httpbin.org/get')
+            assert.equal(url, 'https://httpbin.org/get') // NOTE: bug in httpbin
         })
 
         it('must fetch https request', async() => {
@@ -21,7 +21,23 @@ describe('request', () => {
 
             const { url } = JSON.parse(responseBody.toString())
 
-            assert.ok(url === 'https://httpbin.org/get', 'url === https://httpbin.org/get')
+            assert.equal(url, 'https://httpbin.org/get')
+        })
+
+        it('must not download body', async() => {
+            const tran = await request.fetch('http://httpbin.org/get', {}, { download: false })
+
+            const { responseBody } = tran
+
+            assert.equal(responseBody.length, 0)
+        })
+
+        it('must redirect', async() => {
+            const tran = await request.fetch('https://httpbin.org/status/302', {}, { follow: true })
+
+            const { responseCode } = tran
+
+            assert.equal(responseCode, 200)
         })
     })
 
@@ -31,7 +47,15 @@ describe('request', () => {
 
             const { responseBody } = tran
 
-            assert.ok(responseBody.length === 0, 'responseBody.length === 0')
+            assert.equal(responseBody.length, 0)
+        })
+
+        it('must redirect', async() => {
+            const tran = await request.request({ method: 'GET', uri: 'https://httpbin.org/status/302', follow: true })
+
+            const { responseCode } = tran
+
+            assert.equal(responseCode, 200)
         })
     })
 })
