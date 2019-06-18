@@ -58,4 +58,12 @@ describe('request', () => {
             assert.equal(responseCode, 200)
         })
     })
+
+    describe('timeout harness', async() => {
+        it('must timeout', async function() {
+            this.timeout(4000)
+
+            await request.request({ method: 'GET', uri: 'https://twilio.com:9443', timeout: 3000 })
+        })
+    })
 })
