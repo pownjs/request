@@ -11,7 +11,7 @@ describe('request', () => {
 
             const { url } = JSON.parse(responseBody.toString())
 
-            assert.equal(url, 'https://httpbin.org/get') // NOTE: bug in httpbin
+            assert.equal(url, 'http://httpbin.org/get')
         })
 
         it('must fetch https request', async() => {
