@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/pownjs/pown-request#readme",
   "dependencies": {
-    "@pown/async": "^2.6.0",
+    "@pown/async": "^2.7.0",
     "is-deflate": "^1.0.0",
     "is-gzip": "^2.0.0",
     "performance-now": "^2.1.0"
