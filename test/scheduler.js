@@ -3,11 +3,11 @@ const { Scheduler, SystemScheduler } = require('../lib/scheduler')
 const assert = require('assert')
 
 describe('scheduler', () => {
-    describe('#fetch()', () => {
+    describe('#request()', () => {
         const scheduler = new Scheduler()
 
         it('must fetch http request', async() => {
-            const tran = await scheduler.fetch('http://httpbin.org/get')
+            const tran = await scheduler.request({ uri: 'http://httpbin.org/get' })
 
             const { responseBody } = tran
 
@@ -17,7 +17,7 @@ describe('scheduler', () => {
         })
 
         it('must fetch https request', async() => {
-            const tran = await scheduler.fetch('https://httpbin.org/get')
+            const tran = await scheduler.request({ uri: 'https://httpbin.org/get' })
 
             const { responseBody } = tran
 
@@ -27,12 +27,12 @@ describe('scheduler', () => {
         })
 
         it('must fetch with a pause between requests', async() => {
-            await scheduler.fetch('https://httpbin.org/get')
+            await scheduler.request({ uri: 'https://httpbin.org/get' })
 
             scheduler.pause()
 
-            const promise2 = scheduler.fetch('https://httpbin.org/get')
-            const promise3 = scheduler.fetch('https://httpbin.org/get')
+            const promise2 = scheduler.request({ uri: 'https://httpbin.org/get' })
+            const promise3 = scheduler.request({ uri: 'https://httpbin.org/get' })
 
             scheduler.resume()
 
@@ -42,11 +42,11 @@ describe('scheduler', () => {
 })
 
 describe('systemScheduler', () => {
-    describe('#fetch()', () => {
+    describe('#request()', () => {
         const scheduler = new SystemScheduler()
 
-        it('must fetch http request', async() => {
-            const tran = await scheduler.fetch('http://httpbin.org/get')
+        it('must request http request', async() => {
+            const tran = await scheduler.request({ uri: 'http://httpbin.org/get' })
 
             const { responseBody } = tran
 
@@ -56,7 +56,7 @@ describe('systemScheduler', () => {
         })
 
         it('must fetch https request', async() => {
-            const tran = await scheduler.fetch('https://httpbin.org/get')
+            const tran = await scheduler.request({ uri: 'https://httpbin.org/get' })
 
             const { responseBody } = tran
 
