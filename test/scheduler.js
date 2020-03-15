@@ -25,6 +25,19 @@ describe('scheduler', () => {
 
             assert.equal(url, 'https://httpbin.org/get')
         })
+
+        it('must fetch with a pause between requests', async() => {
+            await scheduler.fetch('https://httpbin.org/get')
+
+            scheduler.pause()
+
+            const promise2 = scheduler.fetch('https://httpbin.org/get')
+            const promise3 = scheduler.fetch('https://httpbin.org/get')
+
+            scheduler.resume()
+
+            await Promise.all([promise2, promise3])
+        })
     })
 })
 
