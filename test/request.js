@@ -37,7 +37,7 @@ describe('request', () => {
 
             const { responseCode } = tran
 
-            assert.equal(responseCode, 200)
+            assert.notEqual(responseCode, 302)
         })
     })
 
