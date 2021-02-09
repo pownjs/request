@@ -67,6 +67,16 @@ exports.yargs = {
         const scheduler = new Scheduler({ maxConcurrent: requestConcurrency })
 
         await eachOfLimit(it(), taskConcurrency, async(uri) => {
+            if (!uri) {
+                return
+            }
+
+            uri = uri.trim()
+
+            if (!/https?:\/\//i.test(uri)) {
+                return
+            }
+
             const { responseCode, responseMessage } = await scheduler.request({ uri, method, headers })
 
             console.log(`${method} ${uri} -> ${responseCode} ${responseMessage}`)
