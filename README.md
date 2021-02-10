@@ -4,11 +4,6 @@
 
 # Pown Request
 
-> **WARNING**: Work in progress.
+This is a simple library and pownjs util for performing requests. The module comes with its own Scheduler.
 
-## Wish List
-
-
-* Proxy support.
-* Return response body as promise if configured.
-* HTTP/2 support - virtually around the corner.
+> **WARNING**: This is a work in progress. There is no plan to keep this module backwards compatible.
