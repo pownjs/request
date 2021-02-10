@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/pownjs/pown-request#readme",
   "dependencies": {
-    "@pown/async": "^2.7.0",
-    "@pown/cli": "^2.24.0",
+    "bottleneck": "^2.19.5",
     "is-deflate": "^1.0.0",
     "is-gzip": "^2.0.0",
     "performance-now": "^2.1.0"
   },
   "devDependencies": {
+    "@pown/cli": "^2.24.0",
     "@pown/toolchain": "^2.0.0"
   },
   "pown": {
