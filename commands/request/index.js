@@ -4,33 +4,45 @@ exports.yargs = {
 
     builder: (yargs) => {
         yargs.options('method', {
-            alias: 'X',
+            alias: ['X'],
             type: 'string',
             describe: 'Custom method',
             default: 'GET'
         })
 
         yargs.options('header', {
-            alias: 'H',
+            alias: ['H'],
             type: 'string',
             describe: 'Custom header'
         })
 
         yargs.options('task-concurrency', {
-            alias: 'C',
+            alias: ['C'],
             type: 'number',
             default: Infinity
         })
 
         yargs.options('request-concurrency', {
-            alias: 'c',
+            alias: ['c'],
             type: 'number',
             default: Infinity
+        })
+
+        yargs.options('filter-code', {
+            alias: ['code'],
+            type: 'string',
+            default: ''
+        })
+
+        yargs.options('download', {
+            alias: ['o', 'output'],
+            type: 'boolean',
+            default: false
         })
     },
 
     handler: async(argv) => {
-        const { method, header, taskConcurrency, requestConcurrency, url } = argv
+        const { method, header, taskConcurrency, requestConcurrency, filterCode, download, url } = argv
 
         const headers = {}
 
@@ -58,10 +70,14 @@ exports.yargs = {
             }
         }
 
+        const { writeFile } = require('fs')
+        const { promisify } = require('util')
         const { makeLineIterator } = require('@pown/cli/lib/line')
         const { eachOfLimit } = require('@pown/async/lib/eachOfLimit')
 
         const { Scheduler } = require('../../lib/scheduler')
+
+        const writeFileAsync = promisify(writeFile)
 
         const it = makeLineIterator(url)
         const scheduler = new Scheduler({ maxConcurrent: requestConcurrency })
@@ -77,9 +93,19 @@ exports.yargs = {
                 return
             }
 
-            const { responseCode, responseMessage } = await scheduler.request({ uri, method, headers })
+            const { responseCode, responseMessage, responseBody } = await scheduler.request({ uri, method, headers })
+
+            if (filterCode) {
+                if (filterCode != responseCode) {
+                    return
+                }
+            }
 
             console.log(`${method} ${uri} -> ${responseCode} ${responseMessage}`)
+
+            if (download) {
+                await writeFileAsync(uri.replace(/\W+/g, '_').replace(/_+/, '_').replace(/([a-zA-Z0-9]+)$/, '.$1'), responseBody)
+            }
         })
     }
 }
