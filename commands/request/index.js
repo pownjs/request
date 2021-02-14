@@ -39,10 +39,16 @@ exports.yargs = {
             type: 'boolean',
             default: false
         })
+
+        yargs.options('content-sniff-size', {
+            alias: ['s', 'content-sniff', 'sniff', 'sniff-size'],
+            type: 'number',
+            default: 5
+        })
     },
 
     handler: async(argv) => {
-        const { method, header, taskConcurrency, requestConcurrency, filterCode, download, url } = argv
+        const { method, header, taskConcurrency, requestConcurrency, filterCode, download, contentSniffSize, url } = argv
 
         const headers = {}
 
@@ -101,7 +107,9 @@ exports.yargs = {
                 }
             }
 
-            console.log(`${method} ${uri} -> ${responseCode} ${responseMessage}`)
+            const responseBodySniff = responseBody.slice(0, contentSniffSize).toString('hex')
+
+            console.log(`${method} ${uri} -> ${responseCode} [${responseMessage}] ${responseBodySniff}`)
 
             if (download) {
                 await writeFileAsync(uri.replace(/\W+/g, '_').replace(/_+/, '_').replace(/([a-zA-Z0-9]+)$/, '.$1'), responseBody)
