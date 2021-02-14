@@ -109,7 +109,7 @@ exports.yargs = {
 
             const responseBodySniff = responseBody.slice(0, contentSniffSize).toString('hex')
 
-            console.log(`${method} ${uri} -> ${responseCode} [${responseMessage}] ${responseBodySniff}`)
+            console.info(`${method} ${uri} -> ${responseCode} [${responseMessage}] ${responseBodySniff}`)
 
             if (download) {
                 await writeFileAsync(uri.replace(/\W+/g, '_').replace(/_+/, '_').replace(/([a-zA-Z0-9]+)$/, '.$1'), responseBody)
