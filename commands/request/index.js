@@ -19,36 +19,48 @@ exports.yargs = {
         yargs.options('task-concurrency', {
             alias: ['C'],
             type: 'number',
+            describe: 'The number of request tasks to run at the same time',
             default: Infinity
         })
 
         yargs.options('request-concurrency', {
             alias: ['c'],
             type: 'number',
+            describe: 'The number of requests to send at the same time',
             default: Infinity
         })
 
         yargs.options('filter-code', {
             alias: ['code'],
             type: 'string',
+            describe: 'Filter responses with code',
             default: ''
+        })
+
+        yargs.options('print', {
+            alias: ['p'],
+            type: 'boolean',
+            describe: 'Print response body',
+            default: false
         })
 
         yargs.options('download', {
             alias: ['o', 'output'],
             type: 'boolean',
+            describe: 'Download response body',
             default: false
         })
 
         yargs.options('content-sniff-size', {
             alias: ['s', 'content-sniff', 'sniff', 'sniff-size'],
             type: 'number',
+            describe: 'Specify the size of the content sniff',
             default: 5
         })
     },
 
     handler: async(argv) => {
-        const { method, header, taskConcurrency, requestConcurrency, filterCode, download, contentSniffSize, url } = argv
+        const { method, header, taskConcurrency, requestConcurrency, filterCode, print, download, contentSniffSize, url } = argv
 
         const headers = {}
 
@@ -99,7 +111,9 @@ exports.yargs = {
                 return
             }
 
-            const { responseCode, responseMessage, responseBody } = await scheduler.request({ uri, method, headers })
+            const response = await scheduler.request({ uri, method, headers })
+
+            const { responseCode, responseMessage, responseBody } = response
 
             if (filterCode) {
                 if (filterCode != responseCode) {
@@ -110,6 +124,10 @@ exports.yargs = {
             const responseBodySniff = responseBody.slice(0, contentSniffSize).toString('hex')
 
             console.info(`${method} ${uri} -> ${responseCode} [${responseMessage}] ${responseBodySniff}`)
+
+            if (print) {
+                console.log(responseBody.toString())
+            }
 
             if (download) {
                 await writeFileAsync(uri.replace(/\W+/g, '_').replace(/_+/, '_').replace(/([a-zA-Z0-9]+)$/, '.$1'), responseBody)
