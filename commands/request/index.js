@@ -30,8 +30,20 @@ exports.yargs = {
             default: Infinity
         })
 
+        yargs.options('url-prefix', {
+            alias: ['P', 'prefix'],
+            type: 'string',
+            describe: 'Add prefix to each url'
+        })
+
+        yargs.options('url-suffix', {
+            alias: ['S', 'suffix'],
+            type: 'string',
+            describe: 'Add suffix to each url'
+        })
+
         yargs.options('filter-code', {
-            alias: ['code'],
+            alias: ['code', 'filter-status', 'status'],
             type: 'string',
             describe: 'Filter responses with code',
             default: ''
@@ -60,7 +72,7 @@ exports.yargs = {
     },
 
     handler: async(argv) => {
-        const { method, header, taskConcurrency, requestConcurrency, filterCode, print, download, contentSniffSize, url } = argv
+        const { method, header, taskConcurrency, requestConcurrency, urlPrefix, urlSuffix, filterCode, print, download, contentSniffSize, url } = argv
 
         const headers = {}
 
@@ -107,13 +119,25 @@ exports.yargs = {
 
             uri = uri.trim()
 
+            if (!uri) {
+                return
+            }
+
+            if (urlPrefix) {
+                uri = urlPrefix + uri
+            }
+
+            if (urlSuffix) {
+                uri = uri + urlSuffix
+            }
+
             if (!/https?:\/\//i.test(uri)) {
                 return
             }
 
             const response = await scheduler.request({ uri, method, headers })
 
-            const { responseCode, responseMessage, responseBody } = response
+            const { responseCode, responseBody } = response
 
             if (filterCode) {
                 if (filterCode != responseCode) {
@@ -123,7 +147,7 @@ exports.yargs = {
 
             const responseBodySniff = responseBody.slice(0, contentSniffSize).toString('hex')
 
-            console.info(`${method} ${uri} -> ${responseCode} [${responseMessage}] ${responseBodySniff}`)
+            console.info(`${method} ${uri} -> ${responseCode} ${responseBody.length} ${responseBodySniff}`)
 
             if (print) {
                 console.log(responseBody.toString())
