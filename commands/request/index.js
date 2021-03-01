@@ -16,6 +16,13 @@ exports.yargs = {
             describe: 'Custom header'
         })
 
+        yargs.option('accept-unauthorized', {
+            alias: ['k', 'insecure'],
+            type: 'boolean',
+            describe: 'Accept unauthorized TLS errors',
+            default: false
+        })
+
         yargs.options('task-concurrency', {
             alias: ['C'],
             type: 'number',
@@ -72,16 +79,12 @@ exports.yargs = {
     },
 
     handler: async(argv) => {
-        const { method, header, taskConcurrency, requestConcurrency, urlPrefix, urlSuffix, filterCode, print, download, contentSniffSize, url } = argv
+        const { method, header, acceptUnauthorized, taskConcurrency, requestConcurrency, urlPrefix, urlSuffix, filterCode, print, download, contentSniffSize, url } = argv
 
         const headers = {}
 
         if (header) {
-            if (!Array.isArray(header)) {
-                header = [header]
-            }
-
-            for (let entry of header) {
+            for (let entry of Array.isArray(header) ? header : [header]) {
                 let [name = '', value = ''] = entry.split(':', 1)
 
                 name = name.trim() || entry
@@ -135,7 +138,7 @@ exports.yargs = {
                 return
             }
 
-            const response = await scheduler.request({ uri, method, headers })
+            const response = await scheduler.request({ uri, method, headers, rejectUnauthorized: !acceptUnauthorized })
 
             const { responseCode, responseBody } = response
 
