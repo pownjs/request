@@ -24,7 +24,7 @@
   "homepage": "https://github.com/pownjs/pown-request#readme",
   "dependencies": {
     "@pown/async": "^2.11.0",
-    "@pown/cli": "^2.27.1",
+    "@pown/cli": "^2.28.0",
     "bottleneck": "^2.19.5",
     "is-deflate": "^1.0.0",
     "is-gzip": "^2.0.0",
