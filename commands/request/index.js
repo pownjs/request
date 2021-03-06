@@ -1,17 +1,13 @@
-const urlOptions = require('./options/url')
-const outputOptions = require('./options/output')
-const requestOptions = require('./options/request')
-const schedulerOptions = require('./options/scheduler')
-
 exports.yargs = {
     command: 'request [url]',
     describe: 'Send requests',
 
     builder: {
-        ...urlOptions,
-        ...outputOptions,
-        ...requestOptions,
-        ...schedulerOptions,
+        ...require('./options/url'),
+        ...require('./options/proxy'),
+        ...require('./options/output'),
+        ...require('./options/request'),
+        ...require('./options/scheduler'),
 
         'task-concurrency': {
             alias: ['C'],
@@ -28,15 +24,11 @@ exports.yargs = {
 
         const scheduler = new Scheduler()
 
-        const urlOptionsHandler = require('./options/url/handler')
-        const outputOptionsHandler = require('./options/output/handler')
-        const requestOptionsHandler = require('./options/request/handler')
-        const schedulerOptionsHandler = require('./options/scheduler/handler')
-
-        urlOptionsHandler.init(argv, scheduler)
-        outputOptionsHandler.init(argv, scheduler)
-        requestOptionsHandler.init(argv, scheduler)
-        schedulerOptionsHandler.init(argv, scheduler)
+        require('./options/url/handler').init(argv, scheduler)
+        require('./options/proxy/handler').init(argv, scheduler)
+        require('./options/output/handler').init(argv, scheduler)
+        require('./options/request/handler').init(argv, scheduler)
+        require('./options/scheduler/handler').init(argv, scheduler)
 
         const { makeLineIterator } = require('@pown/cli/lib/line')
         const { eachOfLimit } = require('@pown/async/lib/eachOfLimit')
@@ -54,7 +46,12 @@ exports.yargs = {
                 return
             }
 
-            await scheduler.request({ uri })
+            try {
+                await scheduler.request({ uri })
+            }
+            catch (e) {
+                console.error(e)
+            }
         })
     }
 }
