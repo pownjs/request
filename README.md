@@ -80,6 +80,7 @@ Options:
   --help                                                                      Show help  [boolean]
   --url-prefix                                                                Add prefix to each url  [string]
   --url-suffix                                                                Add suffix to each url  [string]
+  --proxy-url, --proxy                                                        Setup proxy  [string] [default: ""]
   --filter-response-code, --response-code, --code, --filter-status, --status  Filter responses with code  [string] [default: ""]
   --content-sniff-size, --content-sniff, --sniff, --sniff-size                Specify the size of the content sniff  [number] [default: 5]
   --print                                                                     Print response body  [boolean] [default: false]
