@@ -11,6 +11,13 @@ module.exports = {
         describe: 'Custom header'
     },
 
+    'connect-timeout': {
+        alias: ['t', 'timeout'],
+        type: 'number',
+        describe: 'Maximum time allowed for connection',
+        default: 30000
+    },
+
     'accept-unauthorized': {
         alias: ['k', 'insecure'],
         type: 'boolean',

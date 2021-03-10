@@ -1,11 +1,21 @@
 const init = (options, scheduler) => {
-    const { method, header } = options
+    const { method, header, connectTimeout, acceptAnauthorized } = options
 
     if (method) {
         scheduler.on('request-scheduled', (request) => {
             request.method = method
         })
     }
+
+    if (connectTimeout) {
+        scheduler.on('request-scheduled', (request) => {
+            request.timeout = connectTimeout
+        })
+    }
+
+    scheduler.on('request-scheduled', (request) => {
+        request.rejectUnauthorized = !acceptAnauthorized
+    })
 
     if (header) {
         const headers = {}
