@@ -87,6 +87,7 @@ Options:
   --download, --output                                                        Download response body  [boolean] [default: false]
   --method, -X                                                                Custom method  [string]
   --header, -H                                                                Custom header  [string]
+  --connect-timeout, -t, --timeout                                            Maximum time allowed for connection  [number] [default: 30000]
   --accept-unauthorized, -k, --insecure                                       Accept unauthorized TLS errors  [boolean] [default: false]
   --request-concurrency, -c                                                   The number of requests to send at the same time  [number] [default: Infinity]
   --task-concurrency, -C                                                      The number of request tasks to run at the same time  [number] [default: Infinity]
