@@ -6,7 +6,7 @@
 
 # Pown Request
 
-This is a simple library and pownjs command for performing requests. The module comes with its own Scheduler.
+This is a simple library and pownjs command for performing requests. This module comes with its own Scheduler.
 
 ## Credits
 
@@ -76,19 +76,19 @@ pown-cli request [url]
 Send requests
 
 Options:
-  --version                                                                   Show version number  [boolean]
-  --help                                                                      Show help  [boolean]
-  --url-prefix                                                                Add prefix to each url  [string]
-  --url-suffix                                                                Add suffix to each url  [string]
-  --proxy-url, --proxy                                                        Setup proxy  [string] [default: ""]
-  --filter-response-code, --response-code, --code, --filter-status, --status  Filter responses with code  [string] [default: ""]
-  --content-sniff-size, --content-sniff, --sniff, --sniff-size                Specify the size of the content sniff  [number] [default: 5]
-  --print                                                                     Print response body  [boolean] [default: false]
-  --download, --output                                                        Download response body  [boolean] [default: false]
-  --method, -X                                                                Custom method  [string]
-  --header, -H                                                                Custom header  [string]
-  --connect-timeout, -t, --timeout                                            Maximum time allowed for connection  [number] [default: 30000]
-  --accept-unauthorized, -k, --insecure                                       Accept unauthorized TLS errors  [boolean] [default: false]
-  --request-concurrency, -c                                                   The number of requests to send at the same time  [number] [default: Infinity]
-  --task-concurrency, -C                                                      The number of request tasks to run at the same time  [number] [default: Infinity]
+  --version                                                 Show version number  [boolean]
+  --help                                                    Show help  [boolean]
+  --url-prefix                                              Add prefix to each url  [string]
+  --url-suffix                                              Add suffix to each url  [string]
+  --proxy-url, --proxy                                      Setup proxy  [string] [default: ""]
+  --filter-response-code, --response-code, --filter-status  Filter responses with code  [string] [default: ""]
+  --content-sniff-size, --content-sniff, --sniff-size       Specify the size of the content sniff  [number] [default: 5]
+  --print-response-body, --print-body                       Print response body  [boolean] [default: false]
+  --download-response-body, --download-body                 Download response body  [boolean] [default: false]
+  --method, -X                                              Custom method  [string]
+  --header, -H                                              Custom header  [string]
+  --connect-timeout, -t, --timeout                          Maximum time allowed for connection  [number] [default: 30000]
+  --accept-unauthorized, -k, --insecure                     Accept unauthorized TLS errors  [boolean] [default: false]
+  --request-concurrency, -c                                 The number of requests to send at the same time  [number] [default: Infinity]
+  --task-concurrency, -C                                    The number of request tasks to run at the same time  [number] [default: Infinity]
 ```
