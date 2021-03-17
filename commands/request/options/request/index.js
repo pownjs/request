@@ -14,7 +14,14 @@ module.exports = {
     'connect-timeout': {
         alias: ['t', 'timeout'],
         type: 'number',
-        describe: 'Maximum time allowed for connection',
+        describe: 'Maximum time allowed for the connection to start',
+        default: 30000
+    },
+
+    'data-timeout': {
+        alias: ['T'],
+        type: 'number',
+        describe: 'Maximum time allowed for the data to arrive',
         default: 30000
     },
 

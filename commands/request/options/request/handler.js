@@ -1,5 +1,5 @@
 const init = (options, scheduler) => {
-    const { method, header, connectTimeout, acceptAnauthorized } = options
+    const { method, header, connectTimeout, dataTimeout, acceptAnauthorized } = options
 
     if (method) {
         scheduler.on('request-scheduled', (request) => {
@@ -9,7 +9,13 @@ const init = (options, scheduler) => {
 
     if (connectTimeout) {
         scheduler.on('request-scheduled', (request) => {
-            request.timeout = connectTimeout
+            request.connectTimeout = connectTimeout
+        })
+    }
+
+    if (dataTimeout) {
+        scheduler.on('request-scheduled', (request) => {
+            request.dataTimeout = dataTimeout
         })
     }
 
