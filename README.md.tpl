@@ -6,7 +6,7 @@
 
 # Pown Request
 
-This is a simple library and pownjs command for performing requests. The module comes with its own Scheduler.
+This is a simple library and pownjs command for performing requests. This module comes with its own Scheduler.
 
 ## Credits
 

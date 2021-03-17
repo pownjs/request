@@ -24,13 +24,13 @@
     "url": "https://github.com/pownjs/pown-request/issues"
   },
   "homepage": "https://github.com/pownjs/pown-request#readme",
-  "devDependencies": {
-    "@pown/toolchain": "^2.1.0",
+  "peerDependencies": {
     "@pown/async": "^2.11.0",
     "@pown/cli": "^2.29.0",
     "proxy-agent": "^4.0.1"
   },
-  "peerDependencies": {
+  "devDependencies": {
+    "@pown/toolchain": "^2.1.0",
     "@pown/async": "^2.11.0",
     "@pown/cli": "^2.29.0",
     "proxy-agent": "^4.0.1"
