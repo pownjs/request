@@ -1,5 +1,5 @@
 const init = (options, scheduler) => {
-    const { method, header, connectTimeout, dataTimeout, acceptAnauthorized } = options
+    const { method, header, connectTimeout, dataTimeout, acceptUnauthorized } = options
 
     if (method) {
         scheduler.on('request-scheduled', (request) => {
@@ -20,7 +20,7 @@ const init = (options, scheduler) => {
     }
 
     scheduler.on('request-scheduled', (request) => {
-        request.rejectUnauthorized = !acceptAnauthorized
+        request.rejectUnauthorized = !acceptUnauthorized
     })
 
     if (header) {
