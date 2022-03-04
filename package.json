@@ -45,15 +45,5 @@
     "commands": [
       "commands/request"
     ]
-  },
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "extends": "./.babelrc"
-        }
-      ]
-    ]
   }
 }
