@@ -27,13 +27,12 @@
   "peerDependencies": {
     "@pown/async": "^2.11.0",
     "@pown/cli": "^2.29.0",
-    "proxy-agent": "^4.0.1"
+    "proxy-agent": "^5.0.0"
   },
   "devDependencies": {
     "@pown/async": "^2.11.0",
     "@pown/cli": "^2.30.0",
-    "@pown/toolchain": "^2.1.0",
-    "proxy-agent": "^4.0.1"
+    "proxy-agent": "^5.0.0"
   },
   "dependencies": {
     "bottleneck": "^2.19.5",
