@@ -7,7 +7,7 @@
     "request": "POWN_ROOT=. pown-cli request",
     "usage": "POWN_ROOT=. pown-cli request --help",
     "build": "true",
-    "test": "mocha"
+    "test": "NODE_ENV=test npx mocha@latest"
   },
   "repository": {
     "type": "git",
